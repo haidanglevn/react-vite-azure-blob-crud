@@ -14,8 +14,6 @@ const UploadPage: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  console.log(images);
-
   useEffect(() => {
     fetchAllFiles();
   }, []);
@@ -85,6 +83,36 @@ const UploadPage: React.FC = () => {
       });
   };
 
+  const handleDownload = async (filename: string) => {
+    const baseUrl = "https://fs16fileupload.azurewebsites.net/file/filename";
+    const encodedFilename = encodeURIComponent(filename);
+    const url = `${baseUrl}?filename=${encodedFilename}`;
+    console.log("Downloading... ", url);
+
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+      });
+
+      if (!response.ok) {
+        throw new Error("File download failed");
+      }
+
+      const blob = await response.blob();
+      const downloadUrl = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = downloadUrl;
+      link.setAttribute("download", filename); // Set the download attribute with the file name
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode!.removeChild(link);
+      window.URL.revokeObjectURL(downloadUrl);
+    } catch (error) {
+      console.error("Error:", error);
+      // Handle the error
+    }
+  };
+
   return (
     <div
       style={{
@@ -148,6 +176,17 @@ const UploadPage: React.FC = () => {
               }}
             >
               X
+            </button>
+            <button
+              onClick={() => handleDownload(image.name)}
+              style={{
+                position: "absolute",
+                bottom: 0,
+                right: 0,
+                border: "1px solid black",
+              }}
+            >
+              ⬇
             </button>
           </div>
         ))}
