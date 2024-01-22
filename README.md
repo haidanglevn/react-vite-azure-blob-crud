@@ -4,7 +4,8 @@
 
 The Azure Blob CRUD Application provides a simple and intuitive interface for interacting with Azure Blob Storage. Users can upload, view, and delete photos stored in Azure Blob Storage.
 
-![image](https://github.com/haidanglevn/react-vite-azure-blob-crud/assets/24937536/9ab51ac6-9f51-4657-9e99-f7e36246ab31)
+![image](https://github.com/haidanglevn/react-vite-azure-blob-crud/assets/24937536/8afebc23-6c2f-49f8-8b34-db59ee3353a1)
+
 
 ## Live Application
 
@@ -15,6 +16,7 @@ The back end repo can be found [here](https://github.com/haidanglevn/aspdotnet-a
 
 - **Photo Upload:** Users can upload files to Azure Blob Storage.
 - **View Photo:** Users can view the list of files currently stored in the blob storage.
+- **Download Photo:** Users can download files from the blob storage.
 - **Delete Photo:** Users can delete files from the blob storage.
 
 ## Technologies Used
